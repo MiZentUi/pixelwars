@@ -1,0 +1,100 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #005a42;
+    font-family: 'Noto Sans Mono';
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#users {
+    display: flex;
+    flex-direction: column;
+    background-color: #fdaf17;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+#users div {
+    display: flex;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    align-items: center;
+}
+
+#users div img {
+    border-radius: 5px;
+    max-width: 100px;
+    max-height: 100px;
+    margin: 5px;
+}
+
+.user-info {
+    display: block !important;
+    margin: 5px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.user-info div {
+    padding: 0 !important;
+}
+
+.status-input {
+    font-family: 'Noto Sans Mono';
+    height: fit-content;
+    margin: 2px 10px;
+    border-radius: 5px;
+    padding: 0 3px;
+    border: 1px #fdaf17 solid;
+}
+
+#snackbar {
+    display: none;
+    position: fixed;
+    background-color: black;
+    border-radius: 10px;
+    margin: auto;
+    left: 0;
+    min-height: 30px;
+    right: 0;
+    z-index: 10;
+    bottom: 100px;
+    min-width: fit-content;
+    width: 25%;
+    opacity: 0;
+    padding: 10px;
+    animation: snackbar_animation 2s linear 1;
+    pointer-events: none;
+}
+
+#snackbar p {
+    font-size: 15px;
+    font-family: 'Noto Sans Mono';
+    margin: auto;
+    text-align: center;
+    word-break: break-all;
+    color: white;
+}
+
+@keyframes snackbar_animation {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

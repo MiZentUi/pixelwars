@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=0">
+    <title>Pixel Wars Admin</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto Sans Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/admin.js"></script>
+</head>
+
+<body th:switch="${admin}">
+    <div th:case="'true'" id="container">
+        <div id="users"></div>
+        <div id="snackbar">
+            <p></p>
+        </div>
+    </div>
+    <span th:case="*">You are not admin!</span>
+</body>
+
+</html>

@@ -1,0 +1,368 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #005a42;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: hidden;
+    user-select: none;
+    font-family: 'Noto Sans Mono';
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#header {
+    position: fixed;
+    top: 2vh;
+    left: 2vw;
+    right: 2vw;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+#header .left-corner {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    transform-origin: top left;
+}
+
+#header .left-corner .logo {
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    box-shadow: 0 0 5px black;
+    margin: 5px;
+    align-items: center;
+}
+
+#header .left-corner .logo p {
+    font-size: 20px;
+    margin: 0 0 0 10px;
+}
+
+#header .left-corner .logo svg {
+    width: 50px;
+    height: 50px;
+}
+
+#header .right-corner {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+#scalers {
+    display: flex;
+    top: 2vh;
+    width: fit-content;
+    margin: 5px 0;
+}
+
+#scalers div {
+    height: fit-content;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 100%;
+    margin: 5px;
+    background-color: white;
+}
+
+#account {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 10px;
+    align-items: center;
+    transform-origin: top right;
+}
+
+#account div {
+    width: fit-content;
+    height: fit-content;
+    margin: auto 5px;
+}
+
+#account p {
+    margin: 0;
+    padding: 0;
+}
+
+#account-picture {
+    max-height: 50px;
+    max-width: 50px;
+    border-radius: 25px;
+    margin: 5px;
+}
+
+#account .footer {
+    font-size: 10px;
+    color: gray;
+    width: fit-content;
+    margin: 0;
+    justify-content: space-between;
+}
+
+#logout:hover {
+    cursor: pointer;
+    color: black;
+}
+
+#header .right-corner .top-users {
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 15px;
+    box-shadow: 0 0 5px black;
+    margin: 5px;
+    transform-origin: top right;
+}
+
+#header .right-corner .top-users .title {
+    text-align: center;
+}
+
+#header .right-corner .top-users p {
+    margin: 0;
+    padding: 0;
+}
+
+#header .right-corner .top-users .user {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    align-items: center;
+}
+
+#header .right-corner .top-users .user .info {
+    margin: 5px;
+}
+
+#header .right-corner .top-users .user img {
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+#header .right-corner .top-users .user .username {
+    font-size: 15px;
+}
+
+#header .right-corner .top-users .user .footer {
+    font-size: 10px;
+    color: gray;
+    width: fit-content;
+    margin: 0;
+}
+
+#canvas {
+    position: fixed;
+    width: fit-content;
+    height: fit-content;
+    scale: calc(250px / 90%);
+    background-color: white;
+    border: 5px #fdaf17 solid;
+    border-radius: 5px;
+    image-rendering: optimizeSpeed;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+    cursor: pointer;
+    transition: scale 0.1s ease-in-out;
+}
+
+.pixel {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    width: 5px;
+    height: 5px;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+.pixel:hover {
+    border: 1px gray solid;
+}
+
+.pixel-active {
+    border: 1px gray solid;
+}
+
+.button {
+    font-size: 16px;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    border-radius: 15px;
+    color: black;
+    padding: 5px 15px;
+    user-select: none;
+    box-shadow: 0 0 5px black;
+    cursor: pointer;
+    display: inline;
+    margin: 5px;
+}
+
+#place-button {
+    position: fixed;
+    bottom: 2vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+#place-button {
+    text-align: center;
+}
+
+#palette {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+    background-color: white;
+    box-shadow: 0 0 5px black;
+    width: 100%;
+    cursor: auto;
+    padding-bottom: 5px;
+}
+
+#colors {
+    padding: 5px;
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.color-box {
+    display: flex;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.color {
+    height: 25px;
+    min-width: 45px;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    max-width: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 1px black;
+    border-radius: 10px;
+}
+
+.color-active {
+    border-radius: 0;
+}
+
+#buttons {
+    user-select: none;
+    width: fit-content;
+    margin: 10px auto;
+    display: block;
+}
+
+#buttons div {
+    box-shadow: none;
+    border: 0.1px gray solid;
+}
+
+#snackbar {
+    display: none;
+    position: fixed;
+    background-color: black;
+    border-radius: 10px;
+    margin: auto;
+    left: 0;
+    min-height: 30px;
+    right: 0;
+    z-index: 10;
+    bottom: 100px;
+    min-width: fit-content;
+    width: 25%;
+    opacity: 0;
+    padding: 10px;
+    animation: snackbar_animation 2s linear 1;
+    pointer-events: none;
+}
+
+#snackbar p {
+    font-size: 15px;
+    font-family: 'Noto Sans Mono';
+    margin: auto;
+    text-align: center;
+    word-break: break-all;
+    color: white;
+}
+
+@keyframes snackbar_animation {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #header {
+        top: 1vh;
+    }
+
+    #header .left-corner {
+        scale: 0.9;
+        align-items: center;
+    }
+
+    #header .left-corner .logo p {
+        display: none;
+    }
+
+    #header .right-corner .top-users {
+        scale: 0.75;
+    }
+
+    #header .right-corner .top-users .user .footer {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    #account {
+        scale: 0.8;
+    }
+
+    #header .right-corner .top-users {
+        scale: 0;
+    }
+}
