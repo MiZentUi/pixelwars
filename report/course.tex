@@ -1,0 +1,25 @@
+\documentclass[14pt,a4paper]{extarticle}
+
+\input{preamble.tex}
+
+\begin{document}
+
+\input{course_title.tex}
+
+\setcounter{page}{2}
+
+\newpage
+\renewcommand\contentsname{\centerline{\uppercase{Содержание}}}
+\tableofcontents
+\thispagestyle{empty}
+
+\input{course_content.tex}
+
+\newpage
+\addcontentsline{toc}{section}{Cписок использованных источников}
+\renewcommand{\bibsection}{\section*{\centering{\uppercase{Cписок использованных источников}}}}
+\bibliography{references.bib}
+
+\input{course_anexxes.tex}
+
+\end{document}

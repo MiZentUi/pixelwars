@@ -5,6 +5,8 @@ function snackbar_alert(message) {
     setTimeout(() => { snackbar.style.display = "none" }, 2000);
 }
 
+const canvas_size = 200;
+
 let pixels = []
 let selectedPixel = null;
 let prevColor = "white";
@@ -47,20 +49,42 @@ function get_top_users() {
     });
 }
 
+function get_announcement() {
+    return fetch("/canvas/get_announcement").then(response => response.json()).then((json) => {
+        document.getElementById("announcement").innerText = json["announcement"];
+    });
+}
+
+function announce(announcement) {
+    return fetch("/canvas/set_announcement", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "announcement": announcement }) }).then((response) => {
+        if (response.status == 200) {
+            setTimeout(snackbar_alert, 0, "Done");
+        } else if (response.status = 403) {
+            setTimeout(snackbar_alert, 0, "You are not admin!");
+        } else {
+            setTimeout(snackbar_alert, 0, "Error!");
+        }
+    });
+}
+
 function call_handlers() {
     setTimeout(get_canvas, 0);
     setTimeout(get_pixels_count, 0);
     setTimeout(get_top_users, 0);
+    setTimeout(get_announcement, 0);
 }
 
 function set_pixels(json) {
     for (let i in json) {
         let pixel_json = json[i];
-        let pixel = pixels[pixel_json["x"]][pixel_json["y"]];
-        console.log(pixel_json);
-        pixel.style.backgroundColor = pixel_json["color"];
-        if ("author" in pixel_json) {
-            pixel.setAttribute("title", pixel_json["author"]);
+        if (pixel_json["x"] < canvas_size && pixel_json["y"] < canvas_size) {
+            let pixel = pixels[pixel_json["x"]][pixel_json["y"]];
+            if (!pixel.classList.contains("pixel-active")) {
+                pixel.style.backgroundColor = pixel_json["color"];
+                if ("author" in pixel_json) {
+                    pixel.setAttribute("title", pixel_json["author"]);
+                }
+            }
         }
     }
 }
@@ -118,7 +142,6 @@ window.addEventListener("load", () => {
     const acceptButton = document.getElementById("accept-button");
     const logout = document.getElementById("logout");
 
-    const canvas_size = 250;
     let canvas_scale = 1;
     let paint_mode = false;
 
@@ -166,10 +189,12 @@ window.addEventListener("load", () => {
 
     container.addEventListener("wheel", (event) => {
         const delta_scale = 0.05;
-        canvas_scale -= delta_scale * event.deltaY / Math.abs(event.deltaY);
-        canvas_scale = Math.min(Math.max(250 * 0.8 / Math.max(window.innerWidth, window.innerHeight), canvas_scale), 5);
-        canvas.style.transformOrigin = `${event.clientX}px ${event.clientY}px`
-        canvas.style.scale = canvas_scale;
+        if (event.deltaY != 0) {
+            canvas_scale -= delta_scale * event.deltaY / Math.abs(event.deltaY);
+            canvas_scale = Math.min(Math.max(250 * 0.8 / Math.max(window.innerWidth, window.innerHeight), canvas_scale), 5);
+            canvas.style.transformOrigin = `${event.clientX}px ${event.clientY}px`
+            canvas.style.scale = canvas_scale;
+        }
     });
 
     document.getElementById("inc-scale").addEventListener("click", () => {
@@ -177,14 +202,14 @@ window.addEventListener("load", () => {
         canvas_scale += delta_scale;
         canvas_scale = Math.min(Math.max(250 * 0.8 / Math.max(window.innerWidth, window.innerHeight), canvas_scale), 5);
         canvas.style.scale = canvas_scale;
-    })
+    });
 
     document.getElementById("dec-scale").addEventListener("click", () => {
         const delta_scale = 0.2;
         canvas_scale -= delta_scale;
         canvas_scale = Math.min(Math.max(250 * 0.8 / Math.max(window.innerWidth, window.innerHeight), canvas_scale), 5);
         canvas.style.scale = canvas_scale;
-    })
+    });
 
     container.addEventListener("mousedown", (event) => {
         startX = event.clientX;
@@ -194,7 +219,7 @@ window.addEventListener("load", () => {
         container.style.cursor = "grabbing";
         container.addEventListener("mousemove", mouseMove);
         container.addEventListener("mouseup", mouseTouchUp);
-    })
+    });
 
     container.addEventListener("touchstart", (event) => {
         for (let i = 0; i < event.changedTouches.length; i++) {
@@ -206,7 +231,7 @@ window.addEventListener("load", () => {
         }
         container.addEventListener("touchmove", touchMove);
         container.addEventListener("touchend", mouseTouchUp);
-    })
+    });
 
     function mouseMove(event) {
         container.style.cursor = "grabbing";
@@ -232,7 +257,6 @@ window.addEventListener("load", () => {
 
     function mouseTouchUp() {
         first_two_touch = true;
-        console.log("end");
         container.style.cursor = "auto";
         container.removeEventListener("mousemove", mouseMove);
         container.removeEventListener("touchmove", touchMove);

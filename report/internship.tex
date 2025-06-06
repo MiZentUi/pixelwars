@@ -1,0 +1,23 @@
+\documentclass[14pt,a4paper]{extarticle}
+
+\input{preamble.tex}
+
+\begin{document}
+
+\input{internship_title.tex}
+
+\newpage
+\renewcommand\contentsname{\centerline{\uppercase{Содержание}}}
+\tableofcontents
+\thispagestyle{empty}
+
+\input{internship_content.tex}
+
+\newpage
+\addcontentsline{toc}{section}{Cписок использованных источников}
+\renewcommand{\bibsection}{\section*{\centering{\uppercase{Cписок использованных источников}}}}
+\bibliography{references.bib}
+
+\input{internship_anexxes.tex}
+
+\end{document}

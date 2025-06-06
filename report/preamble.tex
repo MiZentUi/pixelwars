@@ -1,0 +1,109 @@
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{ragged2e}
+\usepackage{varwidth}
+\usepackage{indentfirst}
+\usepackage{calc}
+\usepackage{tabularx}
+
+\usepackage[small]{titlesec}
+\usepackage[a4paper,
+    left=30mm,
+    right=20mm,
+    top=20mm,
+    bottom=20mm]{geometry}
+
+\justifying
+\sloppy
+
+\setlength{\abovecaptionskip}{\baselineskip + \abovecaptionskip}
+
+\usepackage{fontspec}
+
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}
+\setmainfont[Ligatures={TeX,Historic}]{Times New Roman}
+\setlength{\parindent}{1.25cm}
+\linespread{1}
+
+% hyperlinks
+\usepackage[final,hidelinks]{hyperref}
+
+\renewcommand{\UrlFont}{}
+
+% resourses list
+\usepackage[square,numbers,sort&compress]{natbib}
+
+\bibliographystyle{belarus-specific-utf8gost780u}
+\def\BibUrlRus#1{-- Режим доступа~: \url{#1}}
+\def\BibDateRus#1{-- Дата доступа~: \parsedate{#1}}
+\def\BibUrl#1{\BibUrlRus{#1}}
+\def\BibDate#1{\BibDateRus{#1}}
+\def\BibTitleFormat#1{\StrSubstitute{#1}{ - }{ --- }}
+
+% page numbering
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\addtocontents{toc}{\protect\thispagestyle{fancy}}
+
+% lists
+\usepackage{enumitem}
+
+\setlist{
+    topsep=0em,
+    itemsep=0em,
+    parsep=0em,
+    listparindent=\parindent
+}
+
+\setlist[itemize,0]{itemindent=\parindent + 2.2ex, leftmargin=0ex, label=--}
+\setlist[enumerate,1]{itemindent=\parindent + 2.7ex, leftmargin=0ex}
+\setlist[enumerate,2]{itemindent=\parindent + \parindent - 2.7ex}
+\renewcommand{\labelitemi}{\textendash}
+
+% code listing
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+
+\lstset{
+    columns=fullflexible,
+    basicstyle=\ttfamily\small,
+    tabsize=4,
+    breaklines=true,
+    breakatwhitespace=false,
+    showstringspaces=false,
+    language=Java,
+    linewidth=\textwidth,
+    commentstyle=\color{gray},
+    keywordstyle=\color{orange},
+    stringstyle=\color{Green},
+}
+
+% sections and toc
+\newcommand{\sectionuppercase}[1]{\section[#1]{\uppercase{#1}}}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0.5em}{1.2em}}
+\renewcommand{\l@subsection}{\@dottedtocline{2}{1.7em}{2.0em}}
+\makeatother
+
+% images
+\usepackage{graphicx}
+\usepackage{float}
+
+\graphicspath{ {images/} }
+
+% images and tables caption
+\usepackage{caption}
+\usepackage{subcaption}
+
+\DeclareCaptionLabelFormat{stbfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{stbtable}{Таблица #2}
+\DeclareCaptionLabelSeparator{stb}{~--~}
+\captionsetup{labelsep=stb}
+\captionsetup[figure]{labelformat=stbfigure,justification=centering}
+\captionsetup[table]{labelformat=stbtable,justification=raggedright}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}}

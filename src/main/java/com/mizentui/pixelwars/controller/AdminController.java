@@ -51,6 +51,7 @@ public class AdminController {
             jsonUser.put("id", currrentUser.getId());
             jsonUser.put("name", currrentUser.getName());
             jsonUser.put("email", currrentUser.getEmail());
+            jsonUser.put("subject", currrentUser.getSubject());
             jsonUser.put("picture", currrentUser.getPicture());
             jsonUser.put("status", currrentUser.getStatus());
             jsonUser.put("pixels_count", currrentUser.getPixelsCount());

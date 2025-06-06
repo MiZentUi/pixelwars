@@ -32,6 +32,7 @@ body::-webkit-scrollbar {
     display: flex;
     justify-content: space-between;
     z-index: 10;
+    pointer-events: none;
 }
 
 #header .left-corner {
@@ -39,6 +40,7 @@ body::-webkit-scrollbar {
     flex-direction: column;
     align-items: start;
     transform-origin: top left;
+    pointer-events: auto;
 }
 
 #header .left-corner .logo {
@@ -67,6 +69,7 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     align-items: end;
+    pointer-events: auto;
 }
 
 #scalers {
@@ -173,6 +176,27 @@ body::-webkit-scrollbar {
     font-size: 10px;
     color: gray;
     width: fit-content;
+    margin: 0;
+}
+
+.announcement:has(p:empty) {
+    display: none;
+}
+
+.announcement {
+    background-color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    opacity: 0.75;
+    font-size: 14px;
+    margin: 5px;
+}
+
+.announcement p {
+    color: white;
     margin: 0;
 }
 
@@ -363,6 +387,6 @@ body::-webkit-scrollbar {
     }
 
     #header .right-corner .top-users {
-        scale: 0;
+        display: none;
     }
 }

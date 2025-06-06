@@ -8,23 +8,25 @@ body {
 }
 
 #container {
-    display: flex;
-    justify-content: center;
     padding: 20px;
 }
 
 #users {
     display: flex;
+    width: fit-content;
     flex-direction: column;
     background-color: #fdaf17;
     border-radius: 15px;
+    margin: auto;
     padding: 5px;
+    word-wrap: anywhere;
 }
 
-#users div {
+#users>div {
     display: flex;
     height: fit-content;
     border-radius: 10px;
+    margin: 10px;
     padding: 10px;
     background-color: white;
     align-items: center;

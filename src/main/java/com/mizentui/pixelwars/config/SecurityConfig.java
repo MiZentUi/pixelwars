@@ -18,7 +18,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, ClientRegistrationRepository clientRegistrationRepository) throws Exception {
         httpSecurity
-                .authorizeHttpRequests(matcherRegistry -> matcherRegistry.requestMatchers("/", "/error", "/webjars/**", "/js/index.js", "/css/style.css", "/canvas/**").permitAll().anyRequest().authenticated()).oauth2Login(Customizer.withDefaults())
+                .authorizeHttpRequests(matcherRegistry -> matcherRegistry.requestMatchers("/", "/error", "/webjars/**", "/favicon.ico", "/js/index.js", "/css/style.css", "/canvas/**").permitAll().anyRequest().authenticated()).oauth2Login(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout
                 .logoutSuccessHandler(oidcLogoutSuccessHandler(clientRegistrationRepository))
