@@ -6,52 +6,44 @@
 
 The project is built with the **Spring Framework** and uses a **PostgreSQL** database. Authentication is handled via **Google OAuth 2.0**. For a more detailed description of the project, see the [report](report/course.pdf).
 
-## Table of Contents
-
-- [Install](#install)
-  - [Configure Google OAuth](#configure-google-oauth)
-  - [Build](#build)
-- [Usage](#usage)
-- [License](#license)
-
-## Install
-
-```
-git clone https://github.com/MiZentUi/pixelwars.git
-cd pixelwars
-```
-
-### Configure Google OAuth
-
-Create a file named `application-secrets.properties` and paste your Google OAuth credentials.
-
-Example `application-secrets.propeties`:
-
-```properties
-postgresql.username=user
-postgresql.password=pass
-
-oauth2.google.client-id=....apps.googleusercontent.com
-oauth2.google.client-secret=...
-```
-
-### Build
-
-This project requires [Maven](https://maven.apache.org/) as the build tool.
-
-```
-mvn clean package
-```
-
 ## Usage
 
+### Configure
+
+Create a file named `.env` and paste your credentials.
+
+```shell
+DB_USERNAME=
+DB_PASSWORD=
+
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
+
+OAUTH_CLIENT_ID=
+OAUTH_CLIENT_SECRET=
 ```
-java -jar target/<package>.jar
+
+### Docker Compose
+
+```shell
+docker-compose up --build -d
 ```
 
 After that, open [`localhost`](http://localhost) in your browser.
 
 Additionally, you can change some settings in the [`application.properties`](src/main/resources/application.properties) file.
+
+### Manual
+
+This project requires [Maven](https://maven.apache.org/) as the build tool.
+
+```shell
+mvn clean package
+```
+
+```shell
+java -jar target/<package>.jar
+```
 
 ## License
 
